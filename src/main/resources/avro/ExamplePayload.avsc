@@ -1,0 +1,10 @@
+[
+	{
+		"type": "record",
+		"name": "ExamplePayload",
+		"fields": [
+			{"name": "someString", "type": ["null", "string"], "default": null},
+			{"name": "someLong", "type": "long"}
+		]
+	}
+]

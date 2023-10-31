@@ -1,0 +1,50 @@
+---
+asyncapi: 2.6.0
+info:
+  title: My Demo
+  version: 1.0.0
+  description: The documentation of my demo application
+defaultContentType: application/vnd.apache.avro;version=1.9.0
+
+servers:
+  local-kafka:
+    url: localhost:9092
+    protocol: kafka
+    bindings:
+      kafka:
+        schemaRegistryUrl: "localhost:8081"
+        schemaRegistryVendor: "confluent"
+        schemaRegistryAvailable: true
+
+channels:
+  another-topic:
+    publish:
+      description: Another Topic Description
+      message:
+        contentType: avro/binary
+        $ref: "#/components/messages/AnotherPayload"
+  example-consumer-topic:
+    publish:
+      description: Optional. Customer uploaded an example payload
+      message:
+        contentType: avro/binary
+        $ref: "#/components/messages/ExamplePayload"
+  example-topic:
+    publish:
+      description: Example Topic Description
+      message:
+        contentType: avro/binary
+        $ref: "#/components/messages/ExamplePayload"
+
+components:
+  messages:
+    AnotherPayload:
+      summary: Another Payload Summary
+      schemaFormat: application/vnd.apache.avro;version=1.9.0
+      payload:
+        $ref: "./avro/AnotherPayload.avsc"
+    ExamplePayload:
+      summary: Example Payload Summary
+      schemaFormat: application/vnd.apache.avro;version=1.9.0
+      payload:
+        $ref: "./avro/ExamplePayload.avsc"
